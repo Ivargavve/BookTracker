@@ -6,21 +6,27 @@
 
 ### ✅ Initial Features (MVP)
 - **Log in securely** (Google login + JWT authentication)
-- **Add books** you've read to your **personal library**
+- **Add books** to the **shared public library**
+- **Add books to your personal library** if you’ve read them
 - **Rate books** from 1 to 5 stars
-- **Edit your own books and ratings**
-- **View the global library** of all books added by users
-- **Search** for books by title or author
-- **See average rating** and vote count for each book
-- **See your personal rating** on every book you've rated
+- **Edit or delete your own books and ratings**
+- **Admins can edit or remove any book**
+- **Search** for books in the global library
+- **See average rating** and total votes for every book
+- **See your personal rating** if you’ve rated a book
+
+### 🔒 Permissions Overview
+- Anyone (logged in) can add books to the main library
+- Only the **user who created a book** can edit or delete it
+- **Admins** can edit or delete **any book** as moderators
 
 ### 🔜 Planned Features
-- 🛡️ **Admin dashboard** to moderate books and users
-- 🏅 **Achievements system** – get medals for high-rated submissions
-- 👥 **Friend system** – follow friends and explore their libraries
-- 📊 **Statistics** – see your reading trends and rating history
-- 💬 **Comments or reviews** for each book
-- 📱 **Mobile-optimized experience**
+- 🛡️ **Admin dashboard** to manage books and users
+- 🏅 **Achievements system** – earn medals for high-rated contributions
+- 👥 **Friend system** – view and explore your friends' libraries
+- 📊 **Reading statistics** and personal analytics
+- 💬 **Comments or reviews** on books
+- 📱 **Mobile-friendly experience**
 
 ## 🧱 Tech Stack
 
@@ -42,20 +48,14 @@
 ## 🧭 Architecture Overview
 
 - All books are stored in a **shared public library**
-- Users can **add any public book to their own personal library**
-- Ratings are **per user**, and the **average rating** is shown globally
-- Only the **creator** (or an **admin**) can edit or delete a book
-- Users have a **profile page** showing their books, ratings, and achievements
-- Admins can **remove invalid or abusive books**
+- Users can **add books they've read to their own personal library**
+- Ratings are **per user**, and **aggregated globally**
+- A user can **only edit or delete their own books**
+- **Admins** can moderate and edit **any book**
+- Users have a **profile** with their books, ratings, and achievements
 
 ## 💡 Vision
 
-BookTracker starts as a simple CRUD app for books – but it's being expanded into a **social reading platform**, where users not only track their own reading but engage with a growing community of fellow readers.
+BookTracker starts as a simple CRUD app for books – but it's evolving into a **social reading platform**, where users not only log their reading but connect with others, earn achievements, and explore the broader book community.
 
-Whether you're just logging your favorite novels or earning achievement badges for great recommendations, BookTracker makes your bookshelf smarter, social, and way more fun.
-
-## 📁 Project Structure
-
-book-tracker/
-├── backend/ # .NET 8 API with JWT and Google OAuth
-└── frontend/ # Angular 18 app with Bootstrap and router
+Whether you're logging your latest favorite or following what your friends are reading, BookTracker helps you stay connected through books.
