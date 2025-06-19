@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { BookForm } from './components/book-form/book-form';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'books', pathMatch: 'full' },

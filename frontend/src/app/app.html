@@ -1,6 +1,6 @@
 <nav>
-  <a routerLink="/books">📚 Boklista</a>
-  <a routerLink="/add-book">➕ Lägg till bok</a>
+  <a routerLink="/books" routerLinkActive="active">📚 Boklista</a>
+  <a routerLink="/add-book" routerLinkActive="active">➕ Lägg till bok</a>
 </nav>
 
 <router-outlet></router-outlet>
@@ -25,5 +25,10 @@
     color: #007acc;
     text-decoration: underline;
     cursor: pointer;
+  }
+
+  .active {
+    font-weight: bold;
+    color: #000;
   }
 </style>
