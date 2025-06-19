@@ -33,18 +33,14 @@ export class BookForm {
   }
 
   onSubmit(): void {
-    console.log('Formulär försöker skickas...');
-
     if (this.bookForm.valid) {
       const newBook: Book = this.bookForm.value;
-      console.log('Ny bok:', newBook);
 
       this.bookService.addBook(newBook).subscribe(() => {
-        console.log('Bok tillagd!');
         this.bookForm.reset();
       });
     } else {
-      console.log('Formuläret är ogiltigt');
+        console.log('Form is invalid');
     }
   }
 }
