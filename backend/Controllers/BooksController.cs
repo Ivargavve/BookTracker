@@ -16,12 +16,14 @@ namespace backend.Controllers
             _context = context;
         }
 
+        // GET: api/books
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
             return await _context.Books.ToListAsync();
         }
 
+        // GET: api/books/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)
         {
@@ -30,20 +32,23 @@ namespace backend.Controllers
             return book;
         }
 
+        // POST: api/books
         [HttpPost]
-        public async Task<ActionResult<Book>> PostBook(Book book)
+        public async Task<ActionResult<Book>> CreateBook(Book book)
         {
             _context.Books.Add(book);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetBook), new { id = book.Id }, book);
         }
 
+        // PUT: api/books/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBook(int id, Book book)
+        public async Task<IActionResult> UpdateBook(int id, Book book)
         {
             if (id != book.Id) return BadRequest();
 
             _context.Entry(book).State = EntityState.Modified;
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -57,6 +62,7 @@ namespace backend.Controllers
             return NoContent();
         }
 
+        // DELETE: api/books/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {

@@ -1,0 +1,18 @@
+<div class="book-form">
+  <h2>Lägg till en bok</h2>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <label for="title">Titel:</label>
+    <input id="title" formControlName="title" type="text" required />
+
+    <label for="author">Författare:</label>
+    <input id="author" formControlName="author" type="text" required />
+
+    <label for="publishedDate">Publiceringsdatum:</label>
+    <input id="publishedDate" formControlName="publishedDate" type="date" required />
+
+    <label for="imageUrl">Bild-URL:</label>
+    <input id="imageUrl" formControlName="imageUrl" type="text" />
+
+    <button type="submit" class="btn btn-primary">Lägg till bok</button>
+  </form>
+</div>

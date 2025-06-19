@@ -1,37 +1,58 @@
 {
-  "hash": "981c8d21",
-  "configHash": "9cef4990",
+  "hash": "99c02dff",
+  "configHash": "ff3585ce",
   "lockfileHash": "3af455df",
-  "browserHash": "15fdd2a9",
+  "browserHash": "d9b51298",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "b5cfc7fc",
+      "fileHash": "e8def66f",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "732a70e8",
+      "fileHash": "b1c39705",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "6423058b",
+      "fileHash": "a05514c6",
       "needsInterop": false
     },
     "zone.js": {
       "src": "../../../../../../node_modules/zone.js/fesm2015/zone.js",
       "file": "zone__js.js",
-      "fileHash": "005a6f4a",
+      "fileHash": "568deff2",
       "needsInterop": true
+    },
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "43ba715e",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "48a45a84",
+      "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-DU6MBTXJ": {
-      "file": "chunk-DU6MBTXJ.js"
+    "chunk-EARNKMTH": {
+      "file": "chunk-EARNKMTH.js"
+    },
+    "chunk-JWFFKCFZ": {
+      "file": "chunk-JWFFKCFZ.js"
+    },
+    "chunk-E5ER6AVT": {
+      "file": "chunk-E5ER6AVT.js"
+    },
+    "chunk-5WZ7CC4M": {
+      "file": "chunk-5WZ7CC4M.js"
     },
     "chunk-FQEJ6M7R": {
       "file": "chunk-FQEJ6M7R.js"
