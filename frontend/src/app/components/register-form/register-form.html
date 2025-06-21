@@ -1,0 +1,12 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <label for="username">Username:</label>
+  <input id="username" formControlName="username" type="text" required>
+
+  <label for="password">Password:</label>
+  <input id="password" formControlName="password" type="password" required>
+
+  <button type="submit">Register</button>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+</form>

@@ -77,3 +77,5 @@
 /Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 /Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/package-lock.json
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/package.json

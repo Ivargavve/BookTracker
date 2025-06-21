@@ -1,0 +1,17 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <label>
+    Username:
+    <input formControlName="username" />
+  </label>
+
+  <label>
+    Password:
+    <input type="password" formControlName="password" />
+  </label>
+
+  <button type="submit">Login</button>
+
+  <div *ngIf="errorMessage" style="color: red;">
+    {{ errorMessage }}
+  </div>
+</form>

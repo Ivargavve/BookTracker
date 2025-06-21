@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../services/book';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-book-list',
@@ -13,7 +14,10 @@ import { Book } from '../../services/book';
 export class BookList implements OnInit {
   books: Book[] = [];
 
-  constructor(private bookService: BookService) {}
+  constructor(
+    private bookService: BookService,
+    public auth: AuthService  // ← används i templatet för att kolla inloggning
+  ) {}
 
   ngOnInit(): void {
     this.fetchBooks();
@@ -29,5 +33,9 @@ export class BookList implements OnInit {
     this.bookService.deleteBook(id).subscribe(() => {
       this.books = this.books.filter(book => book.id !== id);
     });
+  }
+
+  isValidImageUrl(url: string | null | undefined): boolean {
+    return !!url && url.startsWith('data:image/') && url.length > 100;
   }
 }
