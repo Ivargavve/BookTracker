@@ -36,6 +36,9 @@ export class BookList implements OnInit {
   }
 
   isValidImageUrl(url: string | null | undefined): boolean {
-    return !!url && url.startsWith('data:image/') && url.length > 100;
+    if (!url) return false;
+    const cleanUrl = url.split('?')[0].toLowerCase();
+    return (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://')) &&
+          (cleanUrl.endsWith('.jpg') || cleanUrl.endsWith('.jpeg') || cleanUrl.endsWith('.png'));
   }
 }
