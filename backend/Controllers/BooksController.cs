@@ -2,6 +2,7 @@ using backend.Data;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers
 {
@@ -34,6 +35,7 @@ namespace backend.Controllers
 
         // POST: api/books
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Book>> CreateBook(Book book)
         {
             _context.Books.Add(book);
@@ -43,6 +45,7 @@ namespace backend.Controllers
 
         // PUT: api/books/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateBook(int id, Book book)
         {
             if (id != book.Id) return BadRequest();
@@ -64,6 +67,7 @@ namespace backend.Controllers
 
         // DELETE: api/books/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteBook(int id)
         {
             var book = await _context.Books.FindAsync(id);

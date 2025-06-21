@@ -68,3 +68,12 @@
 /Users/ivargavelin/BookTracker/backend/obj/Debug/net8.0/backend.pdb
 /Users/ivargavelin/BookTracker/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 /Users/ivargavelin/BookTracker/backend/obj/Debug/net8.0/ref/backend.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/BCrypt.Net-Next.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/Users/ivargavelin/BookTracker/backend/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
