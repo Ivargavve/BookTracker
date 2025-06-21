@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
-import { jwtDecode } from 'jwt-decode'; // ✅
+import { jwtDecode } from 'jwt-decode';
 
 interface JwtPayload {
   name?: string;

@@ -9,7 +9,7 @@
   <a *ngIf="!isLoggedIn" routerLink="/register" routerLinkActive="active">📝 Register</a>
 
   <!-- Endast synlig om inloggad -->
-  <a *ngIf="isLoggedIn" (click)="logout()" style="cursor: pointer;">📕 Logga ut</a>
+  <a *ngIf="isLoggedIn" (click)="logout()" style="cursor: pointer;">📕 Log out</a>
 </nav>
 
 <router-outlet></router-outlet>

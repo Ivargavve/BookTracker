@@ -33,14 +33,15 @@ export class BookForm {
   }
 
   onSubmit(): void {
+    console.log('onSubmit called');
     if (this.bookForm.valid) {
       const newBook: Book = this.bookForm.value;
-
+      console.log('Submitting book:', newBook);
       this.bookService.addBook(newBook).subscribe(() => {
         this.bookForm.reset();
       });
     } else {
-        console.log('Form is invalid');
+      console.log('Form is invalid');
     }
   }
 }

@@ -34,7 +34,10 @@ export class LoginForm {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       this.authService.login(username, password).subscribe({
-        next: () => this.router.navigate(['/']),
+        next: (response) => {
+          localStorage.setItem('token', response.token);  // Spara token här
+          this.router.navigate(['/']);
+        },
         error: (err) => {
           this.errorMessage = 'Login failed';
           console.error(err);
