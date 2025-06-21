@@ -4,4 +4,5 @@ export interface Book {
   author: string;
   publishedDate: string;
   imageUrl: string;
+  userId: number;
 }

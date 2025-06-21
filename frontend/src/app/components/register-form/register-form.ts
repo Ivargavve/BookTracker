@@ -36,16 +36,22 @@ export class RegisterForm {
       const { username, password } = this.registerForm.value;
       this.authService.register(username, password).subscribe({
         next: () => {
+          console.log('Registration succeeded for user:', username);
           this.successMessage = 'Registration successful!';
           this.errorMessage = '';
           this.registerForm.reset();
           this.router.navigate(['/login']);
         },
         error: (err) => {
+          console.log('Registration failed for user:', username);
           this.errorMessage = 'Registration failed';
+          this.successMessage = '';
           console.error(err);
         }
       });
+    } else {
+      this.errorMessage = 'Please fill in all required fields.';
+      this.successMessage = '';
     }
   }
 }

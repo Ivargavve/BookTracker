@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../services/book';
 import { AuthService } from '../../services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-book-list',
@@ -13,14 +14,30 @@ import { AuthService } from '../../services/auth.service';
 })
 export class BookList implements OnInit {
   books: Book[] = [];
+  currentUserId: number | null = null;
 
   constructor(
     private bookService: BookService,
-    public auth: AuthService  // ← används i templatet för att kolla inloggning
+    public auth: AuthService  // används i templatet för att kolla inloggning
   ) {}
 
   ngOnInit(): void {
     this.fetchBooks();
+    this.setCurrentUserId();
+  }
+
+  setCurrentUserId(): void {
+    const token = this.auth.getToken();
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+        // Läs ut användarid från claim, justera beroende på ditt backend JWT claims
+        this.currentUserId = +decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || +decoded.sub || null;
+      } catch (error) {
+        console.error('Invalid token', error);
+        this.currentUserId = null;
+      }
+    }
   }
 
   fetchBooks(): void {

@@ -10,6 +10,6 @@
     <p>Author: {{ book.author }}</p>
     <p>Published Date: {{ book.publishedDate | date }}</p>
     
-    <button *ngIf="auth.isLoggedIn" class="btn btn-danger" (click)="deleteBook(book.id)">Remove</button>
+    <button *ngIf="book.userId === currentUserId" class="btn btn-danger" (click)="deleteBook(book.id)">Remove</button>
   </div>
 </div>

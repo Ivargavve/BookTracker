@@ -3,6 +3,7 @@ using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace backend.Controllers
 {
@@ -21,6 +22,8 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
+            // Om du vill visa alla böcker oavsett ägare, behåll så här.
+            // Vill du visa bara inloggad användares böcker, lägg till filter på UserId
             return await _context.Books.ToListAsync();
         }
 
@@ -38,8 +41,19 @@ namespace backend.Controllers
         [Authorize]
         public async Task<ActionResult<Book>> CreateBook(Book book)
         {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim == null) return Unauthorized();
+
+            if (!int.TryParse(userIdClaim.Value, out var userId))
+                return Unauthorized();
+
+            book.UserId = userId;
+
             _context.Books.Add(book);
             await _context.SaveChangesAsync();
+
+            Console.WriteLine($"Book created with Id: {book.Id} by UserId: {book.UserId}");
+
             return CreatedAtAction(nameof(GetBook), new { id = book.Id }, book);
         }
 
@@ -49,6 +63,21 @@ namespace backend.Controllers
         public async Task<IActionResult> UpdateBook(int id, Book book)
         {
             if (id != book.Id) return BadRequest();
+
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim == null) return Unauthorized();
+
+            if (!int.TryParse(userIdClaim.Value, out var userId))
+                return Unauthorized();
+
+            // Kontrollera att användaren äger boken
+            var existingBook = await _context.Books.AsNoTracking().FirstOrDefaultAsync(b => b.Id == id);
+            if (existingBook == null) return NotFound();
+            if (existingBook.UserId != userId)
+                return Forbid("You can only update your own books");
+
+            // Se till att UserId inte ändras via PUT
+            book.UserId = userId;
 
             _context.Entry(book).State = EntityState.Modified;
 
@@ -73,8 +102,18 @@ namespace backend.Controllers
             var book = await _context.Books.FindAsync(id);
             if (book == null) return NotFound();
 
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim == null) return Unauthorized();
+
+            if (!int.TryParse(userIdClaim.Value, out var userId))
+                return Unauthorized();
+
+            if (book.UserId != userId)
+                return Forbid("You can only delete your own books");
+
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
     }
