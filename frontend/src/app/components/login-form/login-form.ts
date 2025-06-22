@@ -18,6 +18,9 @@ import { AuthService } from '../../services/auth.service';
 export class LoginForm {
   loginForm: FormGroup;
   errorMessage: string = '';
+  showPassword: boolean = false;
+
+  
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +33,9 @@ export class LoginForm {
     });
   }
 
+  togglePasswordVisibility(): void {
+  this.showPassword = !this.showPassword;
+}
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
@@ -39,7 +45,8 @@ export class LoginForm {
           this.router.navigate(['/']);
         },
         error: (err) => {
-          this.errorMessage = 'Login failed';
+          console.error('Login error:', err);
+          this.errorMessage = 'Login failed: ' + (err.error?.message || 'Unknown error');
           console.error(err);
         }
       });

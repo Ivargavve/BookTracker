@@ -1,17 +1,33 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <label>
-    Username:
-    <input formControlName="username" />
-  </label>
+<div class="login-wrapper">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>
+      Username:
+      <input 
+        formControlName="username" 
+        placeholder="MyUsername" 
+        autocomplete="username"
+      />
+    </label>
 
-  <label>
-    Password:
-    <input type="password" formControlName="password" />
-  </label>
+    <label>
+      Password:
+      <div class="password-input">
+        <input 
+          [type]="showPassword ? 'text' : 'password'" 
+          formControlName="password" 
+          placeholder="••••••" 
+          autocomplete="current-password"
+        />
+        <button type="button" (click)="togglePasswordVisibility()">
+          {{ showPassword ? 'Hide' : 'Show' }}
+        </button>
+      </div>
+    </label>
 
-  <button type="submit">Login</button>
+    <button type="submit">Login</button>
 
-  <div *ngIf="errorMessage" style="color: red;">
-    {{ errorMessage }}
-  </div>
-</form>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>

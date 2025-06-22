@@ -1,0 +1,105 @@
+.login-wrapper {
+  background-color: rgba(255, 255, 255, 0.4);
+  background-image: url('../../../assets/bookshelf-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  color: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 400px;
+  max-width: 90%;
+  margin: 10vh auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.login-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.login-wrapper label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.login-wrapper input {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.login-wrapper input::placeholder {
+  color: #666;
+  opacity: 0.7;
+}
+
+.login-wrapper input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  background-color: white;
+}
+
+.password-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.password-input input {
+  flex-grow: 1;
+}
+
+.login-wrapper button[type="submit"] {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(49, 49, 49, 0.7); /* 0.7 = 70% opacity */
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.login-wrapper button[type="submit"]:hover {
+  background-color: rgba(49, 49, 49, 0.9); /* Slightly more opaque on hover */
+}
+
+.login-wrapper button[type="button"] {
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.login-wrapper button[type="button"]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.error-message {
+  color: #ff6b6b;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.8rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .login-wrapper {
+    margin: 5vh auto;
+    padding: 1.5rem;
+  }
+}
