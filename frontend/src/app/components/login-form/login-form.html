@@ -1,33 +1,51 @@
-<div class="login-wrapper">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label>
-      Username:
-      <input 
-        formControlName="username" 
-        placeholder="MyUsername" 
-        autocomplete="username"
-      />
-    </label>
+<div class="container mt-5">
+  <div class="card mx-auto p-4 shadow" style="max-width: 400px;">
+    <h2 class="text-center mb-3">Booksy Login</h2>
+    <p class="text-center text-muted mb-4">Welcome back! Please log in to continue.</p>
 
-    <label>
-      Password:
-      <div class="password-input">
-        <input 
-          [type]="showPassword ? 'text' : 'password'" 
-          formControlName="password" 
-          placeholder="••••••" 
-          autocomplete="current-password"
-        />
-        <button type="button" (click)="togglePasswordVisibility()">
-          {{ showPassword ? 'Hide' : 'Show' }}
-        </button>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="username" 
+            placeholder="username" 
+            autocomplete="username"
+          />
+        </div>
       </div>
-    </label>
 
-    <button type="submit">Login</button>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <input 
+            [type]="showPassword ? 'text' : 'password'" 
+            class="form-control" 
+            formControlName="password" 
+            placeholder="password" 
+            autocomplete="current-password"
+          />
+          <button 
+            class="btn btn-outline-secondary" 
+            type="button" 
+            (click)="togglePasswordVisibility()">
+            <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
+      </div>
 
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
-  </form>
+      <button type="submit" class="btn btn-dark w-100">Login</button>
+
+      <div 
+        *ngIf="errorMessage" 
+        class="alert alert-danger mt-3 text-center"
+      >
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
 </div>

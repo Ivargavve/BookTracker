@@ -1,12 +1,48 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <label for="username">Username:</label>
-  <input id="username" formControlName="username" type="text" required>
+<div class="container mt-5">
+  <div class="card mx-auto p-4 shadow" style="max-width: 400px;">
+    <h2 class="text-center mb-3">Create Account</h2>
+    <p class="text-center text-muted mb-4">Join Booksy and start your reading journey.</p>
 
-  <label for="password">Password:</label>
-  <input id="password" formControlName="password" type="password" required>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <input 
+            id="username" 
+            formControlName="username" 
+            type="text" 
+            class="form-control" 
+            placeholder="Enter a username" 
+            required
+          />
+        </div>
+      </div>
 
-  <button type="submit">Register</button>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <input 
+            id="password" 
+            formControlName="password" 
+            type="password" 
+            class="form-control" 
+            placeholder="Create a password" 
+            required
+          />
+        </div>
+      </div>
 
-  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-</form>
+      <button type="submit" class="btn btn-success w-100">Register</button>
+
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3 text-center">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success mt-3 text-center">
+        {{ successMessage }}
+      </div>
+    </form>
+  </div>
+</div>

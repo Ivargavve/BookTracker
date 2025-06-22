@@ -1,15 +1,58 @@
-<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-  <label for="title">Title:</label>
-  <input id="title" formControlName="title" type="text" required>
+<div class="container mt-5">
+  <div class="card mx-auto p-4 shadow" style="max-width: 500px;">
+    <h2 class="text-center mb-3">Publish a Book</h2>
+    <p class="text-center text-muted mb-4">Fill in the details below to add a book to the main library.</p>
 
-  <label for="author">Author:</label>
-  <input id="author" formControlName="author" type="text" required>
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input 
+          id="title" 
+          formControlName="title" 
+          type="text" 
+          class="form-control" 
+          placeholder="e.g. The Great Gatsby" 
+          required
+        />
+      </div>
 
-  <label for="publishedDate">Published Date:</label>
-  <input id="publishedDate" formControlName="publishedDate" type="date" required>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input 
+          id="author" 
+          formControlName="author" 
+          type="text" 
+          class="form-control" 
+          placeholder="e.g. F. Scott Fitzgerald" 
+          required
+        />
+      </div>
 
-  <label for="imageUrl">Image Url:</label>
-  <input id="imageUrl" formControlName="imageUrl" type="url">
+      <div class="mb-3">
+        <label for="publishedDate" class="form-label">Published Date</label>
+        <input 
+          id="publishedDate" 
+          formControlName="publishedDate" 
+          type="date" 
+          class="form-control" 
+          required
+        />
+      </div>
 
-  <button type="submit">Add this book</button>
-</form>
+      <div class="mb-3">
+        <label for="imageUrl" class="form-label">Image URL</label>
+        <input 
+          id="imageUrl" 
+          formControlName="imageUrl" 
+          type="url" 
+          class="form-control" 
+          placeholder="https://..."
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">
+        <i class="fas fa-plus me-2"></i>Add this book
+      </button>
+    </form>
+  </div>
+</div>
