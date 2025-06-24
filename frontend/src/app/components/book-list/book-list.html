@@ -1,29 +1,58 @@
 <div class="container mt-5">
-  
-  <div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
     <div class="col" *ngFor="let book of books">
-      <div class="card h-100 shadow-sm">
-        <div class="row g-0">
-          <div class="col-4 d-flex align-items-center">
-            <img 
-              [src]="isValidImageUrl(book.imageUrl) ? book.imageUrl : 'https://image.bokus.com/images/9789150121285_383x_lasa-bok'"
-              alt="Book Cover" 
-              class="img-fluid rounded-start p-2"
-            />
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h5 class="card-title">{{ book.title }}</h5>
-              <p class="card-text mb-1"><strong>Author:</strong> {{ book.author }}</p>
-              <p class="card-text"><strong>Published:</strong> {{ book.publishedDate | date }}</p>
-              <button 
-                *ngIf="book.userId === currentUserId" 
-                class="btn btn-sm btn-outline-danger mt-2"
-                (click)="deleteBook(book.id)">
-                <i class="fas fa-trash-alt me-1"></i> Remove
-              </button>
-            </div>
-          </div>
+      <div 
+        class="card shadow-sm position-relative d-flex flex-column"
+        style="min-height: 24rem; overflow: visible;"
+      >
+        <!-- Dropdown-ikon (endast för ägaren) -->
+        <div *ngIf="book.userId === currentUserId" class="position-absolute top-0 end-0 m-2 dropdown z-3">
+          <button 
+            class="btn btn-sm btn-light dropdown-toggle" 
+            type="button" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false">
+            <i class="fas fa-pen"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a 
+                class="dropdown-item text-primary cursor-pointer" 
+                role="button"
+                (click)="goToUpdateForm(book.id); $event.stopPropagation()">
+                <i class="fas fa-edit me-2"></i> Update
+              </a>
+            </li>
+            <li>
+              <a 
+                class="dropdown-item text-danger cursor-pointer" 
+                role="button"
+                (click)="deleteBook(book.id); $event.stopPropagation()">
+                <i class="fas fa-trash-alt me-2"></i> Remove
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Titel och författare -->
+        <div class="card-body text-center py-2 flex-shrink-0">
+          <h6 class="card-title mb-1 text-truncate" title="{{ book.title }}">{{ book.title }}</h6>
+          <small class="text-muted d-block text-truncate" title="{{ book.author }}">{{ book.author }}</small>
+        </div>
+
+        <!-- Bild -->
+        <div class="flex-grow-1 d-flex align-items-center justify-content-center" style="padding: 0 0.5rem;">
+          <img 
+            [src]="isValidImageUrl(book.imageUrl) ? book.imageUrl : 'https://image.bokus.com/images/9789150121285_383x_lasa-bok'"
+            alt="Book Cover" 
+            class="img-fluid"
+            style="max-height: 100%; max-width: 100%; object-fit: cover; aspect-ratio: 2 / 3;"
+          />
+        </div>
+
+        <!-- Publiceringsdatum -->
+        <div class="card-footer text-center small text-muted flex-shrink-0 bg-light">
+          Published: {{ book.publishedDate | date }}
         </div>
       </div>
     </div>

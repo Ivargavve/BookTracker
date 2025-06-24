@@ -1,0 +1,77 @@
+<div class="container mt-5">
+  <div class="card mx-auto p-4 shadow" style="max-width: 500px;">
+    <h2 class="text-center mb-3">Update Book</h2>
+    <p class="text-center text-muted mb-4">Edit the details of your book.</p>
+
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-book"></i></span>
+          <input 
+            id="title" 
+            formControlName="title" 
+            type="text" 
+            class="form-control" 
+            placeholder="Enter book title" 
+            required
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user-edit"></i></span>
+          <input 
+            id="author" 
+            formControlName="author" 
+            type="text" 
+            class="form-control" 
+            placeholder="Author name" 
+            required
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="publishedDate" class="form-label">Published Date</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+          <input 
+            id="publishedDate" 
+            formControlName="publishedDate" 
+            type="date" 
+            class="form-control" 
+            required
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="imageUrl" class="form-label">Image URL</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-image"></i></span>
+          <input 
+            id="imageUrl" 
+            formControlName="imageUrl" 
+            type="text" 
+            class="form-control" 
+            placeholder="https://..."
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3 text-center">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success mt-3 text-center">
+        {{ successMessage }}
+      </div>
+    </form>
+  </div>
+</div>

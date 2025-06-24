@@ -18,6 +18,8 @@ import { CommonModule } from '@angular/common';
 })
 export class BookForm {
   bookForm: FormGroup;
+  successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -37,10 +39,24 @@ export class BookForm {
     if (this.bookForm.valid) {
       const newBook: Book = this.bookForm.value;
       console.log('Submitting book:', newBook);
-      this.bookService.addBook(newBook).subscribe(() => {
-        this.bookForm.reset();
+
+      this.bookService.addBook(newBook).subscribe({
+        next: () => {
+          this.successMessage = 'Book added successfully!';
+          this.errorMessage = '';
+          this.bookForm.reset();
+
+          setTimeout(() => this.router.navigate(['/books']), 1500);
+        },
+        error: (err) => {
+          console.error('Error adding book:', err);
+          this.errorMessage = 'Failed to add book.';
+          this.successMessage = '';
+        }
       });
     } else {
+      this.errorMessage = 'Please fill in all required fields.';
+      this.successMessage = '';
       console.log('Form is invalid');
     }
   }

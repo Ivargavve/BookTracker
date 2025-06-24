@@ -4,6 +4,7 @@ import { BookService } from '../../services/book.service';
 import { Book } from '../../services/book';
 import { AuthService } from '../../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-list',
@@ -18,7 +19,8 @@ export class BookList implements OnInit {
 
   constructor(
     private bookService: BookService,
-    public auth: AuthService  // används i templatet för att kolla inloggning
+    public auth: AuthService,  // används i templatet för att kolla inloggning
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +53,12 @@ export class BookList implements OnInit {
       this.books = this.books.filter(book => book.id !== id);
     });
   }
+
+goToUpdateForm(bookId: number): void {
+  console.log('Navigating to update form for book ID:', bookId); 
+  this.router.navigate(['/update', bookId]);
+}
+
 
   isValidImageUrl(url: string | null | undefined): boolean {
     if (!url) return false;
