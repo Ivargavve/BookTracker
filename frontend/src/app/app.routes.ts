@@ -24,5 +24,15 @@ export const routes: Routes = [
   { 
     path: 'register', 
     loadComponent: () => import('./components/register-form/register-form').then(m => m.RegisterForm) 
+  },
+  { 
+    path: 'quotes', 
+    loadComponent: () => import('./components/quote-list/quote-list').then(m => m.QuoteList),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'add-quote', 
+    loadComponent: () => import('./components/quote-form/quote-form').then(m => m.QuoteForm),
+    canActivate: [AuthGuard]
   }
 ];

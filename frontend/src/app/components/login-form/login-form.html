@@ -1,7 +1,7 @@
 <div class="container mt-5">
-  <div class="card mx-auto p-4 shadow" style="max-width: 400px;">
+  <div class="card login-card mx-auto p-4 shadow">
     <h2 class="text-center mb-3">Booksy Login</h2>
-    <p class="text-center text-muted mb-4">Welcome back! Please log in to continue.</p>
+    <p class="text-center login-subtext mb-4">Welcome back! Please log in to continue.</p>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
@@ -30,7 +30,7 @@
             autocomplete="current-password"
           />
           <button 
-            class="btn btn-outline-secondary" 
+            class="btn btn-icon ms-1" 
             type="button" 
             (click)="togglePasswordVisibility()">
             <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-dark w-100">Login</button>
+      <button type="submit" class="btn login-submit-btn w-100">Login</button>
 
       <div 
         *ngIf="errorMessage" 
@@ -49,7 +49,7 @@
 
       <div class="text-center mt-3">
         <span>Don't have an account? </span>
-        <a [routerLink]="['/register']" class="text-decoration-none">Register here</a>
+        <a [routerLink]="['/register']" class="register-link">Register here</a>
       </div>
     </form>
   </div>

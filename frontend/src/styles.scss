@@ -1,14 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
 /* styles.scss */
 
 body {
   font-family: 'Merriweather', serif;
   margin: 0;
   padding: 0;
-  background-color: #fdfdfd; // valfritt, men lite bokigt!
-  color: #1e1e1e; // snygg kontrast till fonten
+  background-color: var(--bg);
+  color: var(--text);
 }
+
+body.light {
+  --bg: #fdf7f2;              /* Varm, lite rosa-beige bakgrund */
+  --text: #2e2b28;            /* Mjuk mörkbrun text */
+  --nav-bg: #f4e9dc;          /* Krämig beige navbar */
+  --footer-bg: #f4e9dc;
+  --hover: #c17c62;           /* Mild terrakotta (hover) */
+  --btn-bg: #fefaf6;          /* Nästan vit knappfärg */
+  --btn-border: #b57e6a;      /* Varm brun-beige */
+  --btn-hover-bg: #f2ded0;
+  --btn-icon-color: #4a3628;
+  --meta-text: #a68b7c;       /* Ljusare ton för sekundär text */
+  --card-border: rgba(0, 0, 0, 0.07);
+}
+
+body.dark {
+  --bg: #2e2b28;              /* Ljust mörkbrun bas (inte svart) */
+  --text: #f4eae3;            /* Ljus sandig vit */
+  --nav-bg: #3c3834;          /* Lite ljusare navbar */
+  --footer-bg: #3c3834;
+  --hover: #f2b794;           /* Varm aprikos-beige för interaktion */
+  --btn-bg: #403c38;
+  --btn-border: #e3c4a8;
+  --btn-hover-bg: #514b45;
+  --btn-icon-color: #f4eae3;
+  --meta-text: #d2bba9;
+  --card-border: rgba(255, 255, 255, 0.07);
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: 1px solid var(--btn-border);
+  background-color: var(--btn-bg);
+  color: var(--btn-icon-color);
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: var(--btn-hover-bg);
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Merriweather', serif;
   margin: 0;
+}
+
+.navbar {
+  background-color: var(--nav-bg) !important;
+}
+
+footer {
+  background-color: var(--footer-bg);
+  color: var(--text);
+}
+
+.input-group-text {
+  background-color: var(--btn-bg);
+  color: var(--btn-icon-color);
+  border: 1px solid var(--btn-border);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+input.form-control {
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--btn-border);
+
+  &::placeholder {
+    color: var(--meta-text);
+  }
 }

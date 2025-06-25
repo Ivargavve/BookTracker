@@ -1,21 +1,40 @@
-.book-card {
+.quote-card {
   background-color: var(--bg);
   color: var(--text);
   border: 1px solid var(--card-border);
-  min-height: 24rem;
+  min-height: 14rem;
+  max-height: none;
   overflow: visible;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   border-radius: 0.5rem;
+  padding: 1rem;
+
+  blockquote {
+    font-style: italic;
+    color: var(--text);
+    word-break: break-word;
+
+    .quote-text {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .blockquote-footer {
+      font-size: 0.9rem;
+      color: var(--meta-text);
+      opacity: 0.9;
+    }
+  }
 }
 
-.book-card-footer {
+.quote-card-footer {
   background-color: var(--footer-bg);
-  color: var(--text);
+  color: var(--meta-text);
   border-top: 1px solid var(--card-border);
   padding: 0.5rem;
 }
 
-.book-card-btn {
+.quote-card-btn {
   background-color: transparent;
   border: none;
   color: var(--btn-icon-color);
@@ -32,30 +51,4 @@
     outline: none;
     box-shadow: none;
   }
-}
-
-.dropdown-menu {
-  background-color: var(--nav-bg);
-  color: var(--text);
-  border: 1px solid var(--card-border);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
-}
-
-.dropdown-item {
-  color: var(--text);
-  transition: background-color 0.2s, color 0.2s;
-
-  &:hover {
-    background-color: var(--btn-hover-bg);
-    color: var(--hover);
-  }
-
-  &.text-danger {
-    color: var(--danger-text);
-  }
-}
-
-.book-card-meta {
-  color: var(--meta-text);
-  font-size: 0.85rem;
 }

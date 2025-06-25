@@ -1,14 +1,12 @@
 <div class="container mt-5">
   <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
     <div class="col" *ngFor="let book of books">
-      <div 
-        class="card shadow-sm position-relative d-flex flex-column"
-        style="min-height: 24rem; overflow: visible;"
-      >
+      <div class="card shadow-sm position-relative d-flex flex-column book-card">
+        
         <!-- Dropdown-ikon (endast för ägaren) -->
         <div *ngIf="book.userId === currentUserId" class="position-absolute top-0 end-0 m-2 dropdown z-3">
           <button 
-            class="btn btn-sm btn-light dropdown-toggle" 
+            class="btn btn-sm btn-icon dropdown-toggle book-card-btn" 
             type="button" 
             data-bs-toggle="dropdown" 
             aria-expanded="false">
@@ -17,7 +15,7 @@
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
               <a 
-                class="dropdown-item text-primary cursor-pointer" 
+                class="dropdown-item cursor-pointer" 
                 role="button"
                 (click)="goToUpdateForm(book.id); $event.stopPropagation()">
                 <i class="fas fa-edit me-2"></i> Update
@@ -37,8 +35,8 @@
         <!-- Titel och författare -->
         <div class="card-body text-center py-2 flex-shrink-0">
           <h6 class="card-title mb-1 text-truncate" title="{{ book.title }}">{{ book.title }}</h6>
-          <small class="text-muted d-block text-truncate" title="{{ book.author }}">{{ book.author }}</small>
-          <small class="text-muted d-block" title="User ID: {{ book.userId }}">Published by user: {{ book.userId }}</small>
+          <small class="book-card-meta  d-block text-truncate" title="{{ book.author }}">{{ book.author }}</small>
+          <small class="book-card-meta  d-block" title="User ID: {{ book.userId }}">Published by user: {{ book.userId }}</small>
         </div>
 
         <!-- Bild -->
@@ -52,9 +50,10 @@
         </div>
 
         <!-- Publiceringsdatum -->
-        <div class="card-footer text-center small text-muted flex-shrink-0 bg-light">
+        <div class="card-footer book-card-meta text-center small flex-shrink-0 book-card-footer">
           Published: {{ book.publishedDate | date }}
         </div>
+
       </div>
     </div>
   </div>

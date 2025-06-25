@@ -1,0 +1,34 @@
+.add-book-card {
+  max-width: 500px;
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.add-book-subtext {
+  color: var(--meta-text);
+}
+
+input.form-control {
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--btn-border);
+
+  &::placeholder {
+    color: var(--meta-text);
+  }
+}
+
+.add-book-submit-btn {
+  background-color: var(--btn-border);
+  color: var(--bg);
+  border: none;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--hover);
+    color: var(--bg);
+  }
+}

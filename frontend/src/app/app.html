@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm px-3">
+<nav class="navbar navbar-expand-lg border-bottom shadow-sm px-3">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/">
       <i class="fas fa-book"></i>
@@ -14,17 +14,39 @@
         <li class="nav-item">
           <a routerLink="/books" routerLinkActive="active" class="nav-link">Library</a>
         </li>
+
         <li class="nav-item" *ngIf="isLoggedIn">
           <a routerLink="/add-book" routerLinkActive="active" class="nav-link">Add a Book</a>
         </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a routerLink="/quotes" routerLinkActive="active" class="nav-link">
+            <i class="fas fa-quote-right me-1"></i>My Quotes
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a routerLink="/add-quote" routerLinkActive="active" class="nav-link">
+            <i class="fas fa-plus me-1"></i>Add Quote
+          </a>
+        </li>
+
         <li class="nav-item" *ngIf="!isLoggedIn">
           <a routerLink="/login" routerLinkActive="active" class="nav-link">Login</a>
         </li>
+
         <li class="nav-item" *ngIf="!isLoggedIn">
           <a routerLink="/register" routerLinkActive="active" class="nav-link">Register</a>
         </li>
+
         <li class="nav-item" *ngIf="isLoggedIn">
           <a (click)="logout()" class="nav-link" style="cursor: pointer;">Log out</a>
+        </li>
+
+        <li class="nav-item d-flex align-items-center">
+          <button (click)="toggleTheme()" class="btn btn-icon">
+            <i class="fas" [ngClass]="currentTheme === 'dark' ? 'fa-moon' : 'fa-sun'"></i>
+          </button>
         </li>
       </ul>
     </div>
@@ -35,7 +57,7 @@
   <router-outlet></router-outlet>
 </main>
 
-<footer class="bg-light text-center py-3 border-top">
+<footer class="text-center py-3 border-top">
   <small>&copy; 2025 Booksy by 
     <a href="https://ivargavelin.com/" target="_blank" rel="noopener noreferrer">Ivar Gavelin</a>
   </small>
