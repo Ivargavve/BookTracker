@@ -46,8 +46,7 @@
           formControlName="imageUrl" 
           type="url" 
           class="form-control" 
-          placeholder="https://..."
-          required
+          placeholder="optional: https://example.com/image.jpg"
         />
       </div>
 
@@ -62,6 +61,7 @@
       <div *ngIf="errorMessage" class="alert alert-danger mt-3 text-center">
         {{ errorMessage }}
       </div>
+
     </form>
   </div>
 </div>

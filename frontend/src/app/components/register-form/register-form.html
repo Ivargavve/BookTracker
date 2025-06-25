@@ -43,6 +43,10 @@
       <div *ngIf="successMessage" class="alert alert-success mt-3 text-center">
         {{ successMessage }}
       </div>
+      <div class="text-center mt-3">
+        <span>Already have an account? </span>
+        <a [routerLink]="['/login']" class="text-decoration-none">Login here</a>
+      </div>
     </form>
   </div>
 </div>

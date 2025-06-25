@@ -44,7 +44,7 @@ export class BookList implements OnInit {
 
   fetchBooks(): void {
     this.bookService.getBooks().subscribe((data) => {
-      this.books = data;
+      this.books = data.reverse();
     });
   }
 

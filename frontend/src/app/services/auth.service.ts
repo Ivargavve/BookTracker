@@ -42,20 +42,6 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  getUsername(): string | null {
-    const token = this.getToken();
-    if (!token) return null;
-
-    try {
-      const decoded = jwtDecode<JwtPayload>(token);
-      // Försök läsa både name och username
-      return decoded.name || decoded.username || null;
-    } catch (err) {
-      console.error('Failed to decode token:', err);
-      return null;
-    }
-  }
-
   logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
