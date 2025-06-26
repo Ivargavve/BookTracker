@@ -1,0 +1,4 @@
+[build]
+base = "frontend"
+command = "ng build --configuration production"
+publish = "dist/book-tracker"

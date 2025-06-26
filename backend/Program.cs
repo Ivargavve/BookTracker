@@ -20,11 +20,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins(
+            "http://localhost:4200",
+            "https://booktrackerbooksy.netlify.app/"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
+
 
 // Lägg till JwtService
 builder.Services.AddScoped<JwtService>();
