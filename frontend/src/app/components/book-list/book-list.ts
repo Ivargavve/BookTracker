@@ -19,7 +19,7 @@ export class BookList implements OnInit {
 
   constructor(
     private bookService: BookService,
-    public auth: AuthService,  // används i templatet för att kolla inloggning
+    public auth: AuthService,
     private router: Router
   ) {}
 
@@ -32,8 +32,7 @@ export class BookList implements OnInit {
     const token = this.auth.getToken();
     if (token) {
       try {
-        const decoded: any = jwtDecode(token);
-        // Läs ut användarid från claim, justera beroende på ditt backend JWT claims
+        const decoded: any = jwtDecode(token); // extrahera token payload
         this.currentUserId = +decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || +decoded.sub || null;
       } catch (error) {
         console.error('Invalid token', error);

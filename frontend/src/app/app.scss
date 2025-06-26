@@ -1,4 +1,4 @@
-/* Behåller struktur så footer trycks ner även vid kort innehåll */
+
 :host {
   display: flex;
   flex-direction: column;
@@ -25,7 +25,6 @@
   }
 }
 
-/* Footer styles */
 footer {
   margin-top: auto;
   padding: 1rem;

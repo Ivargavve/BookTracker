@@ -43,7 +43,7 @@ export class LoginForm {
       const { username, password } = this.loginForm.value;
       this.authService.login(username, password).subscribe({
         next: (response) => {
-          localStorage.setItem('token', response.token);  // Spara token här
+          localStorage.setItem('token', response.token);  // Sparar token
           this.router.navigate(['/']);
         },
         error: (err) => {

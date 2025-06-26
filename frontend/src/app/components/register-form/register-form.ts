@@ -48,7 +48,6 @@ export class RegisterForm {
           console.log('❌ Registration failed for user:', username);
           console.error('Server response:', err);
 
-          // Visa backendens felmeddelande om det finns
           if (err?.error && typeof err.error === 'string') {
             this.errorMessage = err.error;
           } else {

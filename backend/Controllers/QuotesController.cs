@@ -66,7 +66,7 @@ namespace backend.Controllers
             return NoContent();
         }
 
-        // Helper: Extraherar användarens ID från JWT
+        // extraherar användarens ID från JWT
         private int? GetUserId()
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);

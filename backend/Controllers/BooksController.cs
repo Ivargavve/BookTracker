@@ -22,8 +22,6 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
-            // Om du vill visa alla böcker oavsett ägare, behåll så här.
-            // Vill du visa bara inloggad användares böcker, lägg till filter på UserId
             return await _context.Books.ToListAsync();
         }
 

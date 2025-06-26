@@ -7,7 +7,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Lägg till kontroller, Swagger och SQLite
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,7 +14,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=books.db"));
 
-// Lägg till CORS-policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
@@ -29,11 +27,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-// Lägg till JwtService
 builder.Services.AddScoped<JwtService>();
 
-// Läs JWT-nyckeln från konfiguration på ett säkert sätt
 var jwtKeyString = builder.Configuration["Jwt:Key"];
 if (string.IsNullOrEmpty(jwtKeyString))
 {
@@ -41,7 +36,6 @@ if (string.IsNullOrEmpty(jwtKeyString))
 }
 var jwtKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKeyString));
 
-// Lägg till JWT-autentisering
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -62,8 +56,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// ✅ Se till att databasen skapas om den inte finns
-using (var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope()) // Skapa databasen om den inte finns
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.EnsureCreated();
@@ -73,7 +66,7 @@ app.UseCors("AllowAngularApp");
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); // Viktigt: måste komma före UseAuthorization
+app.UseAuthentication(); // måste komma före UseAuthorization
 app.UseAuthorization();
 
 app.MapControllers();
