@@ -27,7 +27,7 @@ export class QuoteForm {
     if (this.quoteForm.valid) {
       this.quoteService.addQuote(this.quoteForm.value).subscribe({
         next: () => {
-          this.successMessage = 'Citatet har lagts till!';
+          this.successMessage = 'Quote added!';
           this.errorMessage = null;
           this.quoteForm.reset();
 
@@ -37,7 +37,7 @@ export class QuoteForm {
         },
         error: () => {
           this.successMessage = null;
-          this.errorMessage = 'Något gick fel. Försök igen.';
+          this.errorMessage = 'Something went wrong, try again.';
         }
       });
     }
