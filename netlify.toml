@@ -1,4 +1,9 @@
 [build]
 base = "frontend"
 command = "ng build --configuration production"
-publish = "dist/book-tracker"
+publish = "dist/book-tracker/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
