@@ -5,13 +5,13 @@
 
     <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="text" class="form-label">Citat</label>
+        <label for="text" class="form-label">Quote</label>
         <textarea 
           id="text"
           formControlName="text"
           class="form-control"
           rows="3"
-          placeholder="Skriv ditt citat här..."
+          placeholder="Write your quote here..."
           required
         ></textarea>
       </div>
@@ -23,7 +23,7 @@
           formControlName="author"
           type="text"
           class="form-control"
-          placeholder="Författarens namn"
+          placeholder="Authors name"
           required
         />
       </div>
