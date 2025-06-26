@@ -58,7 +58,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Aktivera CORS innan auth
+// ✅ Se till att databasen skapas om den inte finns
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.EnsureCreated();
+}
+
 app.UseCors("AllowAngularApp");
 
 app.UseHttpsRedirection();
