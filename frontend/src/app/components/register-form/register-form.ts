@@ -38,17 +38,24 @@ export class RegisterForm {
       const { username, password } = this.registerForm.value;
       this.authService.register(username, password).subscribe({
         next: () => {
-          console.log('Registration succeeded for user:', username);
+          console.log('✅ Registration succeeded for user:', username);
           this.successMessage = 'Registration successful!';
           this.errorMessage = '';
           this.registerForm.reset();
           this.router.navigate(['/login']);
         },
         error: (err) => {
-          console.log('Registration failed for user:', username);
-          this.errorMessage = 'Registration failed';
+          console.log('❌ Registration failed for user:', username);
+          console.error('Server response:', err);
+
+          // Visa backendens felmeddelande om det finns
+          if (err?.error && typeof err.error === 'string') {
+            this.errorMessage = err.error;
+          } else {
+            this.errorMessage = 'Registration failed';
+          }
+
           this.successMessage = '';
-          console.error(err);
         }
       });
     } else {
