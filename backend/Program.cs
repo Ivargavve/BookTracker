@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
             "http://localhost:4200",
-            "https://booktrackerbooksy.netlify.app/"
+            "https://booktrackerbooksy.netlify.app"
         )
         .AllowAnyHeader()
         .AllowAnyMethod();
