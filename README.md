@@ -108,21 +108,10 @@ BookTracker/
 
 ---
 
-## 📸 Screenshots
-
-![Booksy Screenshot](assets/booksy.jpg)
-
----
-
 ## 🧠 Created By
 
 **Ivar Gavelin**  
 Civilingenjör Medieteknik, Linköpings Universitet  
 [ivargavelin@gmail.com](mailto:ivargavelin@gmail.com)  
 [GitHub](https://github.com/Ivargavve)
-
----
-
-## 📃 License
-
-MIT License – free to use, improve and build upon.
+[Portfolio](https://ivargavelin.com)
