@@ -46,6 +46,27 @@ namespace backend.Controllers
             return CreatedAtAction(nameof(GetUserQuotes), new { id = quote.Id }, quote);
         }
 
+        // DELETE: api/quotes/5
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteQuote(int id)
+        {
+            var quote = await _context.Quotes.FindAsync(id);
+            if (quote == null) return NotFound();
+
+            var userId = GetUserId();
+            if (userId == null) return Unauthorized();
+
+            if (quote.UserId != userId.Value)
+                return Forbid("You can only delete your own quotes");
+
+            _context.Quotes.Remove(quote);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // Helper: Extraherar användarens ID från JWT
         private int? GetUserId()
         {
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);

@@ -20,6 +20,10 @@ body.light {
   --btn-icon-color: #4a3628;
   --meta-text: #a68b7c;       /* Ljusare ton för sekundär text */
   --card-border: rgba(0, 0, 0, 0.07);
+
+  /* Fix: primärknapp i light mode */
+  --accent: #b56242;
+  --accent-hover: #9e4e33;
 }
 
 body.dark {
@@ -34,6 +38,22 @@ body.dark {
   --btn-icon-color: #f4eae3;
   --meta-text: #d2bba9;
   --card-border: rgba(255, 255, 255, 0.07);
+
+  /* Primärknapp i dark mode */
+  --accent: #f2b794;
+  --accent-hover: #eaa580;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transition: background-color 0.2s, border-color 0.2s;
+
+  &:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
 }
 
 .btn-icon {
