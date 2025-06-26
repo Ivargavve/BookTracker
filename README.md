@@ -1,61 +1,128 @@
-# BookTracker 📚✨
+# 📚 Booksy – A Full-Stack Book Tracker App
 
-**BookTracker** is a full-stack web application for readers who want to track the books they've read, rate them, explore what others are reading, and connect with fellow book lovers. Built with Angular 18 and .NET 8, it combines clean design, secure authentication, and rich user features – with plenty more to come.
+Booksy is a modern full-stack web application built with **Angular 18** and **.NET 8**, designed for managing and rating books and favorite quotes. The app features JWT authentication, a responsive UI, and full CRUD functionality with SQLite as the backend database.
 
-## 🚀 What You Can Do
+## 🌐 Live Demo
 
-### ✅ Initial Features (MVP)
-- **Log in securely** (Google login + JWT authentication)
-- **Add books** to the **shared public library**
-- **Add books to your personal library** if you’ve read them
-- **Rate books** from 1 to 5 stars
-- **Edit or delete your own books and ratings**
-- **Admins can edit or remove any book**
-- **Search** for books in the global library
-- **See average rating** and total votes for every book
-- **See your personal rating** if you’ve rated a book
+👉 [Visit Booksy](https://booktrackerbooksy.netlify.app/)  
+🔗 Backend hosted on [Render](https://booktracker-n4h6.onrender.com/api/health)
 
-### 🔒 Permissions Overview
-- Anyone (logged in) can add books to the main library
-- Only the **user who created a book** can edit or delete it
-- **Admins** can edit or delete **any book** as moderators
+---
 
-### 🔜 Planned Features
-- 🛡️ **Admin dashboard** to manage books and users
-- 🏅 **Achievements system** – earn medals for high-rated contributions
-- 👥 **Friend system** – view and explore your friends' libraries
-- 📊 **Reading statistics** and personal analytics
-- 💬 **Comments or reviews** on books
-- 📱 **Mobile-friendly experience**
+## 🚀 Features
 
-## 🧱 Tech Stack
+- ✅ User registration & JWT login
+- 📚 Add, edit and delete books
+- 🌟 Rate books (1–5 stars)
+- 📝 Save your favorite quotes
+- 👥 Admin moderation (delete inappropriate content)
+- 🌗 Light/Dark mode toggle
+- 🔐 Secure API with authentication tokens
+- 🌍 Hosted using Netlify (frontend) and Render (backend)
 
-**Frontend**
-- Angular 18 (Standalone Components)
+---
+
+## 🛠 Tech Stack
+
+**Frontend:**
+- Angular 18
+- TypeScript
 - Bootstrap 5
 - Font Awesome
-- Angular Router
-- Reactive Forms
-- TypeScript
 
-**Backend**
+**Backend:**
 - .NET 8 Web API
 - Entity Framework Core
-- SQLite (for development)
+- SQLite database
 - JWT Authentication
-- Google OAuth (via OpenID Connect)
 
-## 🧭 Architecture Overview
+**Hosting:**
+- Frontend: Netlify
+- Backend: Render
+- Uptime: UptimeRobot monitoring
 
-- All books are stored in a **shared public library**
-- Users can **add books they've read to their own personal library**
-- Ratings are **per user**, and **aggregated globally**
-- A user can **only edit or delete their own books**
-- **Admins** can moderate and edit **any book**
-- Users have a **profile** with their books, ratings, and achievements
+---
 
-## 💡 Vision
+## 🧑‍💻 Getting Started
 
-BookTracker starts as a simple CRUD app for books – but it's evolving into a **social reading platform**, where users not only log their reading but connect with others, earn achievements, and explore the broader book community.
+### Prerequisites
 
-Whether you're logging your latest favorite or following what your friends are reading, BookTracker helps you stay connected through books.
+- Node.js & Angular CLI
+- .NET 8 SDK
+- SQLite CLI (optional, for DB browsing)
+
+### Clone the repo
+
+```bash
+git clone https://github.com/Ivargavve/BookTracker.git
+cd BookTracker
+```
+
+### 🔧 Run Backend (.NET)
+
+```bash
+cd backend
+dotnet restore
+dotnet ef database update
+dotnet run
+```
+
+Backend will run on: `http://localhost:5051`
+
+### 🖥️ Run Frontend (Angular)
+
+```bash
+cd frontend
+npm install
+ng serve
+```
+
+Frontend will run on: `http://localhost:4200`
+
+---
+
+## 📁 Project Structure
+
+```
+BookTracker/
+├── backend/         # .NET 8 API with SQLite + EF Core
+│   └── Controllers/
+├── frontend/        # Angular 18 frontend
+│   └── src/app/
+│       ├── book-form/
+│       ├── book-list/
+│       ├── quote-page/
+│       └── services/
+└── README.md
+```
+
+---
+
+## ✨ Future Plans
+
+- Google OAuth login
+- User profiles & friend list
+- Book recommendations
+- Achievement system
+- Search & filtering functionality
+
+---
+
+## 📸 Screenshots
+
+![Booksy Screenshot](assets/booksy.jpg)
+
+---
+
+## 🧠 Created By
+
+**Ivar Gavelin**  
+Civilingenjör Medieteknik, Linköpings Universitet  
+[ivargavelin@gmail.com](mailto:ivargavelin@gmail.com)  
+[GitHub](https://github.com/Ivargavve)
+
+---
+
+## 📃 License
+
+MIT License – free to use, improve and build upon.
