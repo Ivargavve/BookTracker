@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../services/book';
@@ -16,10 +16,12 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
 })
-export class BookForm {
+export class BookForm implements OnInit {
   bookForm: FormGroup;
-  successMessage: string = '';
-  errorMessage: string = '';
+  successMessage = '';
+  errorMessage = '';
+  isSubmitting = false;
+  allBooks: Book[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -34,30 +36,67 @@ export class BookForm {
     });
   }
 
+  ngOnInit(): void {
+    this.bookService.getBooks().subscribe({
+      next: books => this.allBooks = books
+    });
+  }
+
   onSubmit(): void {
-    console.log('onSubmit called');
-    if (this.bookForm.valid) {
-      const newBook: Book = this.bookForm.value;
-      console.log('Submitting book:', newBook);
-
-      this.bookService.addBook(newBook).subscribe({
-        next: () => {
-          this.successMessage = 'Book added successfully!';
-          this.errorMessage = '';
-          this.bookForm.reset();
-
-          setTimeout(() => this.router.navigate(['/books']), 1500);
-        },
-        error: (err) => {
-          console.error('Error adding book:', err);
-          this.errorMessage = 'Failed to add book.';
-          this.successMessage = '';
-        }
-      });
-    } else {
+    if (this.bookForm.invalid || this.isSubmitting) {
       this.errorMessage = 'Please fill in all required fields.';
       this.successMessage = '';
-      console.log('Form is invalid');
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 3000);
+      return;
     }
+
+    const newBook: Book = this.bookForm.value;
+    const today = new Date().toISOString().split('T')[0];
+    const title = newBook.title.trim().toLowerCase();
+
+    if (newBook.publishedDate > today) {
+      this.errorMessage = 'Published date cannot be in the future.';
+      this.successMessage = '';
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 3000);
+      return;
+    }
+
+    const duplicate = this.allBooks.some(book => book.title.trim().toLowerCase() === title);
+    if (duplicate) {
+      this.errorMessage = 'A book with this title already exists.';
+      this.successMessage = '';
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 3000);
+      return;
+    }
+
+    this.isSubmitting = true;
+
+    this.bookService.addBook(newBook).subscribe({
+      next: () => {
+        this.successMessage = 'Book added successfully!';
+        this.errorMessage = '';
+        this.bookForm.reset();
+        this.isSubmitting = false;
+        setTimeout(() => this.router.navigate(['/books']), 1500);
+        setTimeout(() => {
+          this.successMessage = '';
+        }, 3000);
+      },
+      error: (err) => {
+        this.errorMessage = 'Failed to add book.';
+        this.successMessage = '';
+        this.isSubmitting = false;
+
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 3000);
+      }
+    });
   }
 }

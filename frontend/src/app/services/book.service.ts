@@ -23,7 +23,6 @@ export class BookService {
 
   addBook(book: Book): Observable<Book> {
     const token = this.authService.getToken();
-    console.log('Token used:', token);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -33,7 +32,6 @@ export class BookService {
 
   updateBook(id: number, book: Book): Observable<any> {
     const token = this.authService.getToken();
-    console.log('Token used:', token);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`

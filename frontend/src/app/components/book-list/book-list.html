@@ -1,45 +1,37 @@
 <div class="container mt-5">
-  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
-    <div class="col" *ngFor="let book of books">
-      <div class="card shadow-sm position-relative d-flex flex-column book-card">
-        
-        <!-- Dropdown-ikon (endast för ägaren) -->
-        <div *ngIf="book.userId === currentUserId" class="position-absolute top-0 end-0 m-2 dropdown z-3">
+
+  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 justify-content-center">
+    <div class="col" *ngFor="let book of paginatedBooks">
+      <div class="card shadow-sm position-relative d-flex flex-column book-card p-2">
+
+        <div *ngIf="book.userId === currentUserId" class="position-absolute top-0 end-0 m-2 z-3 custom-dropdown">
           <button 
-            class="btn btn-sm btn-icon dropdown-toggle book-card-btn" 
-            type="button" 
-            data-bs-toggle="dropdown" 
-            aria-expanded="false">
+            class="btn btn-sm btn-icon book-card-btn" 
+            (click)="toggleDropdown(book.id)"
+            [attr.aria-haspopup]="true" 
+            [attr.aria-expanded]="openedDropdownId === book.id">
             <i class="fas fa-pen"></i>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end">
+
+          <ul *ngIf="openedDropdownId === book.id" class="custom-dropdown-menu">
             <li>
-              <a 
-                class="dropdown-item cursor-pointer" 
-                role="button"
-                (click)="goToUpdateForm(book.id); $event.stopPropagation()">
+              <a class="custom-dropdown-item" (click)="goToUpdateForm(book.id); $event.stopPropagation()">
                 <i class="fas fa-edit me-2"></i> Update
               </a>
             </li>
             <li>
-              <a 
-                class="dropdown-item text-danger cursor-pointer" 
-                role="button"
-                (click)="deleteBook(book.id); $event.stopPropagation()">
+              <a class="custom-dropdown-item text-danger" (click)="deleteBook(book.id); $event.stopPropagation()">
                 <i class="fas fa-trash-alt me-2"></i> Remove
               </a>
             </li>
           </ul>
         </div>
 
-        <!-- Titel och författare -->
         <div class="card-body text-center py-2 flex-shrink-0">
           <h6 class="card-title mb-1 text-truncate" title="{{ book.title }}">{{ book.title }}</h6>
-          <small class="book-card-meta  d-block text-truncate" title="{{ book.author }}">{{ book.author }}</small>
-          <small class="book-card-meta  d-block" title="User ID: {{ book.userId }}">Published by user: {{ book.userId }}</small>
+          <small class="book-card-meta d-block text-truncate" title="{{ book.author }}">{{ book.author }}</small>
         </div>
 
-        <!-- Bild -->
         <div class="flex-grow-1 d-flex align-items-center justify-content-center" style="padding: 0 0.5rem;">
           <img 
             [src]="isValidImageUrl(book.imageUrl) ? book.imageUrl : 'https://www.pngmart.com/files/8/Book-Cover-Transparent-Background.png'"
@@ -49,12 +41,27 @@
           />
         </div>
 
-        <!-- Publiceringsdatum -->
         <div class="card-footer book-card-meta text-center small flex-shrink-0 book-card-footer">
           Published: {{ book.publishedDate | date }}
         </div>
-
       </div>
     </div>
   </div>
+
+  <nav *ngIf="totalPages > 1" class="mt-4 d-flex justify-content-center">
+    <ul class="pagination custom-pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="prevPage()">«</button>
+      </li>
+      <li 
+        class="page-item" 
+        *ngFor="let page of totalPagesArray" 
+        [class.active]="currentPage === page">
+        <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="nextPage()">»</button>
+      </li>
+    </ul>
+  </nav>
 </div>

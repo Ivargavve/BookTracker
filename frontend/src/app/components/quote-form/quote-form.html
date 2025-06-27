@@ -28,7 +28,12 @@
         />
       </div>
 
-      <button type="submit" class="btn btn-primary w-100">
+      <div *ngIf="quoteForm.get('text')?.value || quoteForm.get('author')?.value" class="preview-box alert alert-secondary mt-3 text-center">
+        “{{ quoteForm.get('text')?.value || '' }}”<br />
+        <span *ngIf="quoteForm.get('author')?.value">– {{ quoteForm.get('author')?.value }}</span>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 mt-3">
         <i class="fas fa-plus me-2"></i>Add Quote
       </button>
 

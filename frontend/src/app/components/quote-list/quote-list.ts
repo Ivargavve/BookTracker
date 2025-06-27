@@ -14,7 +14,12 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class QuoteList implements OnInit {
   quotes: Quote[] = [];
+  paginatedQuotes: Quote[] = [];
   currentUserId: number | null = null;
+
+  currentPage: number = 1;
+  quotesPerPage: number = 5;
+  totalPages: number = 1;
 
   constructor(private quoteService: QuoteService, private auth: AuthService) {}
 
@@ -33,13 +38,43 @@ export class QuoteList implements OnInit {
 
   loadQuotes(): void {
     this.quoteService.getQuotes().subscribe((data) => {
-      this.quotes = data.reverse().slice(0, 5); // visa senaste 5
+      this.quotes = data.reverse();
+      this.totalPages = Math.ceil(this.quotes.length / this.quotesPerPage);
+      this.updatePaginatedQuotes();
     });
+  }
+
+  updatePaginatedQuotes(): void {
+    const start = (this.currentPage - 1) * this.quotesPerPage;
+    const end = start + this.quotesPerPage;
+    this.paginatedQuotes = this.quotes.slice(start, end);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePaginatedQuotes();
+    }
+  }
+
+  nextPage(): void {
+    this.goToPage(this.currentPage + 1);
+  }
+
+  prevPage(): void {
+    this.goToPage(this.currentPage - 1);
+  }
+
+  get totalPagesArray(): number[] {
+    return Array(this.totalPages).fill(0).map((_, i) => i + 1);
   }
 
   deleteQuote(id: number): void {
     this.quoteService.deleteQuote(id).subscribe(() => {
       this.quotes = this.quotes.filter(q => q.id !== id);
+      this.totalPages = Math.ceil(this.quotes.length / this.quotesPerPage);
+      if (this.currentPage > this.totalPages) this.currentPage = this.totalPages;
+      this.updatePaginatedQuotes();
     });
   }
 }

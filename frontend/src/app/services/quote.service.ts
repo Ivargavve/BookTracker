@@ -28,7 +28,6 @@ export class QuoteService {
 
   private createAuthHeaders(): HttpHeaders {
     const token = this.auth.getToken();
-    console.log('JWT Token sent to backend:', token);
     return new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`

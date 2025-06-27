@@ -21,6 +21,7 @@ export class RegisterForm {
   registerForm: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+  isSubmitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -34,32 +35,35 @@ export class RegisterForm {
   }
 
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      const { username, password } = this.registerForm.value;
-      this.authService.register(username, password).subscribe({
-        next: () => {
-          console.log('✅ Registration succeeded for user:', username);
-          this.successMessage = 'Registration successful!';
-          this.errorMessage = '';
-          this.registerForm.reset();
-          this.router.navigate(['/login']);
-        },
-        error: (err) => {
-          console.log('❌ Registration failed for user:', username);
-          console.error('Server response:', err);
+    if (this.registerForm.invalid || this.isSubmitting) return;
 
-          if (err?.error && typeof err.error === 'string') {
-            this.errorMessage = err.error;
-          } else {
-            this.errorMessage = 'Registration failed';
-          }
+    this.isSubmitting = true;
+    const { username, password } = this.registerForm.value;
 
-          this.successMessage = '';
+    this.authService.register(username, password).subscribe({
+      next: () => {
+        this.successMessage = 'Registration successful!';
+        this.errorMessage = '';
+        this.registerForm.reset();
+        this.isSubmitting = false; 
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        const errorResponse = err?.error;
+
+        if (typeof errorResponse === 'string' && errorResponse.toLowerCase().includes('exist')) {
+          this.errorMessage = 'Username already exists.';
+        } else {
+          this.errorMessage = 'Registration failed.';
         }
-      });
-    } else {
-      this.errorMessage = 'Please fill in all required fields.';
-      this.successMessage = '';
-    }
+
+        this.successMessage = '';
+        this.isSubmitting = false;
+
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 3000);
+      }
+    });
   }
 }

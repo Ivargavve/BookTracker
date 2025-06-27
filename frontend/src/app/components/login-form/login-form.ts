@@ -21,8 +21,7 @@ export class LoginForm {
   loginForm: FormGroup;
   errorMessage: string = '';
   showPassword: boolean = false;
-
-  
+  isSubmitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,22 +35,40 @@ export class LoginForm {
   }
 
   togglePasswordVisibility(): void {
-  this.showPassword = !this.showPassword;
-}
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      this.authService.login(username, password).subscribe({
-        next: (response) => {
-          localStorage.setItem('token', response.token);  // Sparar token
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          console.error('Login error:', err);
-          this.errorMessage = 'Login failed: ' + (err.error?.message || 'Unknown error');
-          console.error(err);
-        }
-      });
-    }
+    this.showPassword = !this.showPassword;
   }
+
+  onSubmit(): void {
+    if (this.loginForm.invalid || this.isSubmitting) {
+      this.errorMessage = 'Please fill in all required fields.';
+      setTimeout(() => this.errorMessage = '', 3000);
+      return;
+    }
+
+    this.isSubmitting = true;
+    const { username, password } = this.loginForm.value;
+
+    this.authService.login(username, password).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.token); 
+        this.isSubmitting = false;
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        const errorText = typeof err.error === 'string' ? err.error.toLowerCase() : '';
+
+        if (errorText.includes('invalid') || errorText.includes('wrong')) {
+          this.errorMessage = 'Wrong username or password.';
+        } else if (errorText.includes('not found')) {
+          this.errorMessage = 'User not found.';
+        } else {
+          this.errorMessage = 'Login failed.';
+        }
+
+        this.isSubmitting = false;
+        setTimeout(() => this.errorMessage = '', 3000);
+      }
+    });
+  }
+
 }

@@ -3,8 +3,6 @@
   color: var(--text);
   border: 1px solid var(--card-border);
   min-height: 14rem;
-  max-height: none;
-  overflow: visible;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   border-radius: 0.5rem;
   padding: 1rem;
@@ -27,13 +25,6 @@
   }
 }
 
-.quote-card-footer {
-  background-color: var(--footer-bg);
-  color: var(--meta-text);
-  border-top: 1px solid var(--card-border);
-  padding: 0.5rem;
-}
-
 .quote-card-btn {
   background-color: transparent;
   border: none;
@@ -50,5 +41,30 @@
   &:focus {
     outline: none;
     box-shadow: none;
+  }
+}
+
+.custom-pagination {
+  .page-link {
+    background-color: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--card-border);
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background-color: var(--btn-hover-bg);
+      color: var(--hover);
+    }
+  }
+
+  .page-item.active .page-link {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border-color: var(--primary);
+  }
+
+  .page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }

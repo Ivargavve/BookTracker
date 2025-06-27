@@ -21,6 +21,7 @@ export class UpdateForm implements OnInit {
   bookId!: number;
   errorMessage: string = '';
   successMessage: string = '';
+  isSubmitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -43,39 +44,45 @@ export class UpdateForm implements OnInit {
         this.updateForm.patchValue({
           title: book.title,
           author: book.author,
-          publishedDate: book.publishedDate?.substring(0, 10), // ISO-format för input type="date"
+          publishedDate: book.publishedDate?.substring(0, 10),
           imageUrl: book.imageUrl
         });
       },
-      error: (err) => {
-        console.error(err);
+      error: () => {
         this.errorMessage = 'Could not load the book.';
+        setTimeout(() => this.errorMessage = '', 3000);
       }
     });
   }
 
   onSubmit(): void {
-    if (this.updateForm.valid) {
-      const updatedBook: Book = {
-        id: this.bookId,
-        ...this.updateForm.value
-      };
-
-      this.bookService.updateBook(this.bookId, updatedBook).subscribe({
-        next: () => {
-          this.successMessage = 'Book updated successfully!';
-          this.errorMessage = '';
-          setTimeout(() => this.router.navigate(['/books']), 1500);
-        },
-        error: (err) => {
-          console.error(err);
-          this.errorMessage = 'Failed to update book.';
-          this.successMessage = '';
-        }
-      });
-    } else {
+    if (this.updateForm.invalid || this.isSubmitting) {
       this.errorMessage = 'Please fill in all required fields.';
       this.successMessage = '';
+      setTimeout(() => this.errorMessage = '', 3000);
+      return;
     }
+
+    this.isSubmitting = true;
+
+    const updatedBook: Book = {
+      id: this.bookId,
+      ...this.updateForm.value
+    };
+
+    this.bookService.updateBook(this.bookId, updatedBook).subscribe({
+      next: () => {
+        this.successMessage = 'Book updated successfully!';
+        this.errorMessage = '';
+        this.isSubmitting = false;
+        setTimeout(() => this.router.navigate(['/books']), 1500);
+      },
+      error: () => {
+        this.errorMessage = 'Failed to update book.';
+        this.successMessage = '';
+        this.isSubmitting = false;
+        setTimeout(() => this.errorMessage = '', 3000);
+      }
+    });
   }
 }

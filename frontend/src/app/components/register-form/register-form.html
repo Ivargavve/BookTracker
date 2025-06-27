@@ -36,7 +36,12 @@
         </div>
       </div>
 
-      <button type="submit" class="btn register-submit-btn w-100">Register</button>
+      <button 
+        type="submit" 
+        class="btn register-submit-btn w-100" 
+        [disabled]="isSubmitting">
+        <i class="fas fa-user-plus me-2"></i>Register
+      </button>
 
       <div *ngIf="errorMessage" class="alert alert-danger mt-3 text-center">
         {{ errorMessage }}

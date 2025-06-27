@@ -5,8 +5,9 @@
       Booksy
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon custom-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -16,9 +17,7 @@
         </li>
 
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a routerLink="/quotes" routerLinkActive="active" class="nav-link">
-            My Quotes
-          </a>
+          <a routerLink="/quotes" routerLinkActive="active" class="nav-link">My Quotes</a>
         </li>
 
         <li class="nav-item" *ngIf="isLoggedIn">
@@ -42,12 +41,12 @@
         </li>
 
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a (click)="logout()" class="nav-link" style="cursor: pointer;">Log out</a>
+          <a (click)="logout()"  class="nav-link" style="cursor: pointer;">Log out</a>
         </li>
 
         <li class="nav-item d-flex align-items-center">
-          <button (click)="toggleTheme()" class="btn btn-icon">
-            <i class="fas" [ngClass]="currentTheme === 'dark' ? 'fa-moon' : 'fa-sun'"></i>
+          <button (click)="toggleTheme()" class="btn btn-icon" [ngClass]="currentTheme">
+            <i class="fas" [ngClass]="currentTheme === 'dark' ? 'fa-moon' : 'fa-lightbulb'"></i>
           </button>
         </li>
       </ul>

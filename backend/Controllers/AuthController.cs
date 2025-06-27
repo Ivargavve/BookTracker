@@ -27,7 +27,6 @@ namespace backend.Controllers
             var exists = await _db.Users.AnyAsync(u => u.Username == request.Username);
             if (exists)
             {
-                Console.WriteLine("register failed");
                 return BadRequest("Username already exists");
             }
 
@@ -40,7 +39,6 @@ namespace backend.Controllers
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
 
-            Console.WriteLine("register success");
             return Ok();
         }
 
@@ -50,17 +48,14 @@ namespace backend.Controllers
             var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
             if (user == null)
             {
-                Console.WriteLine("login failed");
                 return Unauthorized("Invalid credentials");
             }
             if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             {
-                Console.WriteLine("login failed");
                 return Unauthorized("Invalid credentials");
             }
 
             var token = _jwt.CreateToken(user);
-            Console.WriteLine("login success");
             return Ok(new { token });
         }
 

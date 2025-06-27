@@ -32,3 +32,8 @@ input.form-control {
     color: var(--bg);
   }
 }
+.add-book-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

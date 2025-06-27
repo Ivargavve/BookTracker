@@ -50,8 +50,6 @@ namespace backend.Controllers
             _context.Books.Add(book);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine($"Book created with Id: {book.Id} by UserId: {book.UserId}");
-
             return CreatedAtAction(nameof(GetBook), new { id = book.Id }, book);
         }
 

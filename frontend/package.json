@@ -27,6 +27,7 @@
     "@angular/build": "^20.0.3",
     "@angular/cli": "^20.0.3",
     "@angular/compiler-cli": "^20.0.0",
+    "@types/bootstrap": "^5.2.10",
     "@types/jasmine": "~5.1.0",
     "@types/jwt-decode": "^2.2.1",
     "jasmine-core": "~5.7.0",
