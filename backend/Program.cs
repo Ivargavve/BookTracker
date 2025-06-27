@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(); // Swagger used for API documentation
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=books.db"));
@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
-        policy.WithOrigins(
+        policy.WithOrigins( // Allow requests from these origins, local and hosted urls
             "http://localhost:4200",
             "https://booktrackerbooksy.netlify.app"
         )
@@ -56,7 +56,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-using (var scope = app.Services.CreateScope()) // Skapa databasen om den inte finns
+using (var scope = app.Services.CreateScope()) // Ensure the database is created
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.EnsureCreated();
@@ -66,7 +66,7 @@ app.UseCors("AllowAngularApp");
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); // måste komma före UseAuthorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

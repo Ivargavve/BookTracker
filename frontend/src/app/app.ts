@@ -21,18 +21,21 @@ export class App implements OnInit {
 
   constructor(public auth: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
+  ngOnInit(): void { 
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark'; // Retrieve saved theme from localStorage
+    // If no theme is saved, default to 'light'
     this.currentTheme = savedTheme || 'light';
     this.applyTheme();
 
     this.router.events.subscribe(event => {
-    if (event instanceof NavigationEnd) {
+    if (event instanceof NavigationEnd) { 
       setTimeout(() => {
         const navbarCollapse = document.getElementById('navbarNav');
-        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-          const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse)
-            || new bootstrap.Collapse(navbarCollapse, { toggle: false });
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) { // Check if the navbar is expanded
+          // Use Bootstrap's Collapse instance to hide the navbar
+          // This ensures that the navbar is closed after navigation
+          const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) 
+            || new bootstrap.Collapse(navbarCollapse, { toggle: false }); 
           bsCollapse.hide();
         }
       }, 100); 
@@ -47,16 +50,16 @@ export class App implements OnInit {
   }
 
   applyTheme(): void {
-    document.body.classList.remove('light', 'dark');
-    document.body.classList.add(this.currentTheme);
+    document.body.classList.remove('light', 'dark'); 
+    document.body.classList.add(this.currentTheme); // Apply the current theme to the body
   }
 
   get isLoggedIn(): boolean {
-    return this.auth.isLoggedIn;
+    return this.auth.isLoggedIn; 
   }
 
   logout(): void {
-    this.auth.logout();
+    this.auth.logout(); 
   }
 
 }

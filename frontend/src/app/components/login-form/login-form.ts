@@ -50,12 +50,12 @@ export class LoginForm {
 
     this.authService.login(username, password).subscribe({
       next: (response) => {
-        localStorage.setItem('token', response.token); 
+        localStorage.setItem('token', response.token); // Save JWT token for later requests
         this.isSubmitting = false;
         this.router.navigate(['/']);
       },
       error: (err) => {
-        const errorText = typeof err.error === 'string' ? err.error.toLowerCase() : '';
+        const errorText = typeof err.error === 'string' ? err.error.toLowerCase() : ''; // Make sure we can compare errors without caring about case or type
 
         if (errorText.includes('invalid') || errorText.includes('wrong')) {
           this.errorMessage = 'Wrong username or password.';

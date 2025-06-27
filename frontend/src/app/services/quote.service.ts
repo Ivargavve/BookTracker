@@ -12,7 +12,7 @@ export class QuoteService {
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   getQuotes(): Observable<Quote[]> {
-    const headers = this.createAuthHeaders();
+    const headers = this.createAuthHeaders(); 
     return this.http.get<Quote[]>(this.apiUrl, { headers });
   }
 
@@ -27,10 +27,10 @@ export class QuoteService {
   }
 
   private createAuthHeaders(): HttpHeaders {
-    const token = this.auth.getToken();
-    return new HttpHeaders({
+    const token = this.auth.getToken(); // Retrieve the token from AuthService
+    return new HttpHeaders({ //
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}` 
     });
   }
 }

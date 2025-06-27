@@ -4,16 +4,16 @@
     <div class="col" *ngFor="let book of paginatedBooks">
       <div class="card shadow-sm position-relative d-flex flex-column book-card p-2">
 
-        <div *ngIf="book.userId === currentUserId" class="position-absolute top-0 end-0 m-2 z-3 custom-dropdown">
+        <div *ngIf="book.userId === currentUserId" class="position-absolute top-0 end-0 m-2 z-3 custom-dropdown"> <!-- Only shows for logged in user -->
           <button 
             class="btn btn-sm btn-icon book-card-btn" 
             (click)="toggleDropdown(book.id)"
             [attr.aria-haspopup]="true" 
             [attr.aria-expanded]="openedDropdownId === book.id">
-            <i class="fas fa-pen"></i>
+            <i class="fas fa-pen"></i> <!-- scss button as bootstrap collides with other menus -->
           </button>
 
-          <ul *ngIf="openedDropdownId === book.id" class="custom-dropdown-menu">
+          <ul *ngIf="openedDropdownId === book.id" class="custom-dropdown-menu"> 
             <li>
               <a class="custom-dropdown-item" (click)="goToUpdateForm(book.id); $event.stopPropagation()">
                 <i class="fas fa-edit me-2"></i> Update
@@ -38,11 +38,11 @@
             alt="Book Cover" 
             class="img-fluid"
             style="max-height: 100%; max-width: 100%; object-fit: cover; aspect-ratio: 2 / 3;"
-          />
+          /> <!-- Link is fallback book cover -->
         </div>
 
         <div class="card-footer book-card-meta text-center small flex-shrink-0 book-card-footer">
-          Published: {{ book.publishedDate | date }}
+          User: {{ book.userId }}, {{ book.publishedDate | date }}
         </div>
       </div>
     </div>

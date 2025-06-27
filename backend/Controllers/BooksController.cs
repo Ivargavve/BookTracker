@@ -15,7 +15,7 @@ namespace backend.Controllers
 
         public BooksController(AppDbContext context)
         {
-            _context = context;
+            _context = context; // Initialize the database context
         }
 
         // GET: api/books
@@ -66,13 +66,13 @@ namespace backend.Controllers
             if (!int.TryParse(userIdClaim.Value, out var userId))
                 return Unauthorized();
 
-            // Kontrollera att användaren äger boken
+            // Controll if the book exists and belongs to the user
             var existingBook = await _context.Books.AsNoTracking().FirstOrDefaultAsync(b => b.Id == id);
             if (existingBook == null) return NotFound();
             if (existingBook.UserId != userId)
                 return Forbid("You can only update your own books");
 
-            // Se till att UserId inte ändras via PUT
+            // Update the book's user ID to ensure it belongs to the current user
             book.UserId = userId;
 
             _context.Entry(book).State = EntityState.Modified;

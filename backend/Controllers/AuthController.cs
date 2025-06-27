@@ -1,7 +1,5 @@
-using backend.Data;              
-using backend.Models;            
-using Microsoft.AspNetCore.Mvc;  
-using System.Security.Claims;    
+using backend.Data;                         
+using Microsoft.AspNetCore.Mvc;    
 using backend.Services;
 using Microsoft.EntityFrameworkCore; 
 using Microsoft.AspNetCore.Authorization;
@@ -12,8 +10,8 @@ namespace backend.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly AppDbContext _db;
-        private readonly JwtService _jwt;
+        private readonly AppDbContext _db; // Database context for accessing user data
+        private readonly JwtService _jwt; // Service for handling JWT token creation and validation
 
         public AuthController(AppDbContext db, JwtService jwt)
         {
@@ -22,10 +20,10 @@ namespace backend.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserDto request)
+        public async Task<IActionResult> Register(UserDto request) 
         {
-            var exists = await _db.Users.AnyAsync(u => u.Username == request.Username);
-            if (exists)
+            var exists = await _db.Users.AnyAsync(u => u.Username == request.Username); //
+            if (exists) // Check if the username already exists
             {
                 return BadRequest("Username already exists");
             }
@@ -56,12 +54,12 @@ namespace backend.Controllers
             }
 
             var token = _jwt.CreateToken(user);
-            return Ok(new { token });
+            return Ok(new { token }); // Return the JWT token upon successful login
         }
 
         [HttpGet("users")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers() // Retrieve a list of all users
         {
             var users = await _db.Users
                 .Select(u => new { u.Id, u.Username })

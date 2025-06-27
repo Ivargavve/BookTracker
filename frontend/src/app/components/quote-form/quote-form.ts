@@ -57,7 +57,7 @@ export class QuoteForm implements OnInit {
     const { text, author } = this.quoteForm.value;
     const newText = text.trim().toLowerCase();
 
-    const duplicate = this.allQuotes.some(q => q.text.trim().toLowerCase() === newText);
+    const duplicate = this.allQuotes.some(q => q.text.trim().toLowerCase() === newText); // Prevent adding the same quote twice
     if (duplicate) {
       this.setError('This quote already exists.');
       return;
@@ -72,7 +72,7 @@ export class QuoteForm implements OnInit {
         this.quoteForm.reset();
         this.isSubmitting = false;
 
-        setTimeout(() => this.router.navigate(['/quotes']), 1500);
+        setTimeout(() => this.router.navigate(['/quotes']), 1500); // Short delay for redirection
       },
       error: () => {
         this.setError('Something went wrong, try again.');

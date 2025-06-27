@@ -53,8 +53,8 @@ export class BookForm implements OnInit {
     }
 
     const newBook: Book = this.bookForm.value;
-    const today = new Date().toISOString().split('T')[0];
-    const title = newBook.title.trim().toLowerCase();
+    const today = new Date().toISOString().split('T')[0]; // Get today's date
+    const title = newBook.title.trim().toLowerCase(); // Check if a book with the same title already exists
 
     if (newBook.publishedDate > today) {
       this.errorMessage = 'Published date cannot be in the future.';

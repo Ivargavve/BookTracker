@@ -16,7 +16,7 @@ interface JwtPayload {
 export class AuthService {
   private apiUrl = `${environment.apiUrl}/auth`;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {} // Initialize the AuthService with HttpClient and Router
 
   login(username: string, password: string) {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { username, password })
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   register(username: string, password: string) {
-    return this.http.post(`${this.apiUrl}/register`, { username, password });
+    return this.http.post(`${this.apiUrl}/register`, { username, password }); 
   }
 
   private saveToken(token: string) {
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    return !!this.getToken();
+    return !!this.getToken(); // Check if token exists
   }
 
   logout(): void {

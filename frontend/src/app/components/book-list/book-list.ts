@@ -41,6 +41,7 @@ export class BookList implements OnInit {
       try {
         const decoded: any = jwtDecode(token);
         this.currentUserId = +decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || +decoded.sub || null;
+        // Extract user ID from JWT, fallback if claim not found
       } catch (error) {
         this.currentUserId = null;
       }
@@ -70,7 +71,7 @@ export class BookList implements OnInit {
     this.openedDropdownId = this.openedDropdownId === bookId ? null : bookId;
   }
 
-  @HostListener('document:click', ['$event'])
+  @HostListener('document:click', ['$event']) // Close pen dropdown if user clicks outside of it
   handleOutsideClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     if (!target.closest('.custom-dropdown')) {

@@ -38,7 +38,7 @@ export class UpdateForm implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bookId = +this.route.snapshot.paramMap.get('id')!;
+    this.bookId = +this.route.snapshot.paramMap.get('id')!; // Get book ID from route parameters
     this.bookService.getBook(this.bookId).subscribe({
       next: (book: Book) => {
         this.updateForm.patchValue({

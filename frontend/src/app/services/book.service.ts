@@ -14,11 +14,11 @@ export class BookService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.apiUrl);
+    return this.http.get<Book[]>(this.apiUrl); // Fetch all books
   }
 
   getBook(id: number): Observable<Book> {
-    return this.http.get<Book>(`${this.apiUrl}/${id}`);
+    return this.http.get<Book>(`${this.apiUrl}/${id}`); // Fetch a single book by ID
   }
 
   addBook(book: Book): Observable<Book> {
@@ -27,7 +27,7 @@ export class BookService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.post<Book>(this.apiUrl, book, { headers });
+    return this.http.post<Book>(this.apiUrl, book, { headers }); // Add a new book
   }
 
   updateBook(id: number, book: Book): Observable<any> {
@@ -36,7 +36,7 @@ export class BookService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put(`${this.apiUrl}/${id}`, book, { headers });
+    return this.http.put(`${this.apiUrl}/${id}`, book, { headers }); // Update an existing book
   }
 
   deleteBook(id: number): Observable<any> {
@@ -44,6 +44,6 @@ export class BookService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers }); // Delete a book by ID
   }
 }

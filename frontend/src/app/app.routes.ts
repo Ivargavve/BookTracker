@@ -10,7 +10,7 @@ export const routes: Routes = [
   { 
     path: 'add-book', 
     loadComponent: () => import('./components/book-form/book-form').then(m => m.BookForm),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard] // Protect the route with AuthGuard
   },
   { 
     path: 'update/:id', 
@@ -22,7 +22,7 @@ export const routes: Routes = [
     loadComponent: () => import('./components/login-form/login-form').then(m => m.LoginForm) 
   },
   { 
-    path: 'register', 
+    path: 'register',
     loadComponent: () => import('./components/register-form/register-form').then(m => m.RegisterForm) 
   },
   { 

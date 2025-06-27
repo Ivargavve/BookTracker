@@ -32,13 +32,14 @@ export class QuoteList implements OnInit {
     const token = this.auth.getToken();
     if (token) {
       const decoded: any = jwtDecode(token);
+      // Extract user ID from JWT
       this.currentUserId = +decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || +decoded.sub || null;
     }
   }
 
   loadQuotes(): void {
     this.quoteService.getQuotes().subscribe((data) => {
-      this.quotes = data.reverse();
+      this.quotes = data.reverse(); // Show newest quotes first
       this.totalPages = Math.ceil(this.quotes.length / this.quotesPerPage);
       this.updatePaginatedQuotes();
     });

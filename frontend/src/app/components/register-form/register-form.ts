@@ -41,7 +41,7 @@ export class RegisterForm {
     const { username, password } = this.registerForm.value;
 
     this.authService.register(username, password).subscribe({
-      next: () => {
+      next: () => { // On successful registration reset form and redirect to login page
         this.successMessage = 'Registration successful!';
         this.errorMessage = '';
         this.registerForm.reset();
