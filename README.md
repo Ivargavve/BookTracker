@@ -9,6 +9,9 @@ Booksy is a modern full-stack web application built with **Angular 18** and **.N
 
 ---
 
+![Preview](frontend/src/assets/bk1.png)
+
+
 ## 🚀 Features
 
 - ✅ User registration & JWT login
@@ -21,6 +24,8 @@ Booksy is a modern full-stack web application built with **Angular 18** and **.N
 - 🌍 Hosted using Netlify (frontend) and Render (backend)
 
 ---
+
+![Preview](frontend/src/assets/bk2.png)
 
 ## 🛠 Tech Stack
 
